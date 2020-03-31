@@ -4,7 +4,7 @@
 Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE6pCyRZ3eupC5EUv3D5e7sI4tD
 
 ## Theoretial foundations of the model ##
-Theoretical foundations can be found here ->
+Details on the theoretical foundations can be found here ->
 
 ## Code ouput and example ##
 
