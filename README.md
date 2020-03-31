@@ -8,5 +8,5 @@ Details on the theoretical foundations can be found here ->
 
 ## Code ouput and example ##
 
-Example and output of code can be found here -> 
+Example and output of source code can be found here -> 
 
