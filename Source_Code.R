@@ -1,53 +1,4 @@
-\documentclass[letterpaper]{article}
-\pdfpagewidth 8.5in
-\pdfpageheight 11.0in
-
-\usepackage{ucs}
-\usepackage[utf8x]{inputenc}
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-
-
-\usepackage[hmargin=1cm,vmargin=3.5cm]{geometry}
-\usepackage{ucs}
-\usepackage[utf8x]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{dcolumn}
-\usepackage{fancyhdr}
-\usepackage{amssymb}
-\usepackage{hyperref}
-\usepackage{graphicx}
-
-\usepackage{color}
-\pagestyle{fancyplain}
-\usepackage{lastpage}
-\definecolor{hellgrau2}{gray}{.6}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{1pt \color{hellgrau2}}
-\newcommand{\E}{\mathrm{E}}
-\newcommand{\Avar}{\mathrm{Avar}}
-\newcommand{\Var}{\mathrm{Var}}
-\fancyfoot{}
-\fancyhf{}
-\rfoot{\textbf{Page \thepage\ of \pageref{LastPage}}}
- \lfoot{\textbf{EC681: MRP}}
- \cfoot{\textbf{Source Code}}
-\DeclareMathOperator{\plim}{plim} 
-\begin{document}
-
-\noindent
- \textsc{\Large EC681 MRP: Predicting Recessions in G7 Countries}\\[.2cm]
- \textsc{\large Source Code and Graphs} \\
- 
-  \begin{center}
-   \line(1,0){450}\\[0.2cm]
-   \end{center}
-
-\showboxdepth=\maxdimen
-\showboxbreadth=\maxdimen
-
-Libaries needed.
-<<>>=
+#Libaries needed.
 
 library(knitr)
 library(readxl)
@@ -56,13 +7,11 @@ library(pROC)
 library(randomForest)
 library(aTSA)
 
-
 set.seed(11233)
 
-@
 
-A function for getting the business cycle peak dates from the data.
-<<>>=
+# A function for getting the business cycle peak dates from the data.
+
   rec_dates <- function(dataset){
     dataset = dataset[1:137,]
     idx = dataset[2:137, 8] - dataset[1:136,8]
@@ -72,9 +21,7 @@ A function for getting the business cycle peak dates from the data.
     
   }
 
-@
 
-<<>>=
 stat_tests <- function(country, path){
   
   MRP_dataset <- read_excel(path, sheet = country)
@@ -91,9 +38,7 @@ stat_tests <- function(country, path){
 }
 @
 
-A function for creating a list with all the models parameters and other relevant information for a given country. 
-<<>>=
-
+#A function for creating a list with all the models parameters and other relevant information for a given country. 
 
 recession <- function(country, path){
   
@@ -119,8 +64,6 @@ recession <- function(country, path){
                    data = data[1:70,], maxit = 1000)
   
   
-  #predProbOut <-  pnorm(as.matrix(cbind(1, data)[71:123, 1:3]) %*% glmOut$coefficients ) 
-  
   predProbOut <- predict(glmOut, newdata = data[71:123,], type = "response")
   
   #in sample results
@@ -142,8 +85,7 @@ recession <- function(country, path){
 
 @
 
-A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
-<<>>=
+#A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
 
 plotRec.out <- function(country){
   # out of sample predictions
@@ -166,9 +108,7 @@ plotRec.out <- function(country){
   
   plot(country$dates[71:123,1], country$predrfOut[,2], type = "l",
        col = "green", xlab = "", ylab = "", axes = F, lwd=3)
-  
 
-  
   legend("topright", legend=c("Probit Regression", "business cycle peak", "Random Forest"), 
          col=c("blue", "red", "green"), lwd=3)
   
@@ -181,7 +121,6 @@ plotRec.out <- function(country){
 
 
 A function for plotting the in sample probability of recession for a given country using both a probit and random forest.
-<<>>=
 
 plotRec.in <- function(country){
   # in sample predictions
@@ -217,10 +156,8 @@ plotRec.in <- function(country){
 
 
 
+#A function for creating all the plots for a given country.
 
-
-A function for creating all the plots for a given country.
-<<>>=
 plotAll <- function(country, path){
   rec <- recession(country, path)
   
@@ -230,54 +167,3 @@ plotAll <- function(country, path){
       
 
 }
-
-#plotAll("USA")
-
-@
-
-A function for plotting all the plots for all the countries.
-<<>>=
-
-plotAllCountries <- function(countries, path){
-  for (country in countries){
-    plotAll(country, path)
-  }
-}
-
-@
-
-<<>>=
-
-countries <- c("USA", "CAN", "UK", "GER", "FRA", "ITA", "JPN")
-path1 <- "C:/Users/bruce/Documents/xiaoli school apr 2019 -/Laurier 2020 schoolwork/MRP/dataset/MRP dataset.xlsx"
-path2 <- "C:/Users/bruce/Documents/xiaoli school apr 2019 -/Laurier 2020 schoolwork/MRP/dataset/MRP dataset USA.xlsx"
-path3 <- "C:/Users/bruce/Documents/xiaoli school apr 2019 -/Laurier 2020 schoolwork/MRP/dataset/MRP dataset using USA.xlsx"
-
-plotAllCountries(countries, path3)
-
-@
-
-
-
-
-
-
-A function for extracting all the plots to png files.
-<<>>=
-
-extractPlots <- function(){
-  plots.dir.path <- list.files(tempdir(), pattern="rs-graphics", full.names = TRUE)
-  plots.png.paths <- list.files(plots.dir.path, pattern=".png", full.names = TRUE)
-  file.copy(from=plots.png.paths, to="xiaoli school apr 2019 -/Laurier 2020 schoolwork/MRP/plots/")
-}
-
-
-#extractPlots()
-
-@
-
-
-
-
-
-\end{document}
