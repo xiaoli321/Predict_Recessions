@@ -6,7 +6,7 @@ Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE
 ## Theoretial foundations of the model ##
 Details on the theoretical foundations can be found here ->
 
-## Code ouput and example ##
+## Example and source code output##
 
 Example and output of source code can be found here -> 
 
