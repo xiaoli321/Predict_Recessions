@@ -21,24 +21,7 @@ set.seed(11233)
     
   }
 
-
-stat_tests <- function(country, path){
-  
-  MRP_dataset <- read_excel(path, sheet = country)
-  
-  #orgaizing the data
-  data <- MRP_dataset[15:137, 4:ncol(MRP_dataset)]
-  
-  n <- ncol(data) -1
-  data <- as.matrix(data)
-  data
-  #for (c in 1:n){
-   # adf.test(data[,c])
-  #}
-}
-@
-
-#A function for creating a list with all the models parameters and other relevant information for a given country. 
+# A function for creating a list with all the models parameters and other relevant information for a given country. 
 
 recession <- function(country, path){
   
@@ -85,7 +68,7 @@ recession <- function(country, path){
 
 @
 
-#A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
+# A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
 
 plotRec.out <- function(country){
   # out of sample predictions
@@ -117,10 +100,7 @@ plotRec.out <- function(country){
       
 }
 
-@
-
-
-A function for plotting the in sample probability of recession for a given country using both a probit and random forest.
+# A function for plotting the in sample probability of recession for a given country using both a probit and random forest.
 
 plotRec.in <- function(country){
   # in sample predictions
@@ -151,8 +131,40 @@ plotRec.in <- function(country){
       
 }
 
+#A function for plotting the in sample AUC curve for the probit and random forest model.
 
-@
+plotAUC.in <- function(country){
+  
+  par(pty = "s")
+  
+  roc(country$recession, country$glmIn$fitted.values, plot=TRUE, 
+      legacy.axes=TRUE, percent=TRUE, xlab="False Positive Percentage", 
+      ylab="True Postive Percentage", main = paste("ROC curve for" , country$nation, "(in sample)"),
+      col="blue", lwd=4, print.auc=TRUE, direction = "<") 
+  
+  plot.roc(country$recession, country$rfIn$votes[,2], percent=TRUE, col="green", 
+           lwd=4, print.auc=TRUE, add=TRUE, print.auc.y=40, direction = "<")
+  
+  legend("bottomright", legend=c("Probit Regression", "Random Forest"), col=c("blue", "green"), lwd=4)
+}
+
+
+#A function for plotting the out of sample AUC curve for the probit and random forest model.
+
+plotAUC.out <- function(country){
+  
+  par(pty = "s")
+  
+  roc(country$recession[71:123], as.numeric(country$predProbOut), plot=TRUE, 
+      legacy.axes=TRUE, percent=TRUE, xlab="False Positive Percentage", 
+      ylab="True Postive Percentage", col="blue", lwd=4, direction = "<",
+      main = paste("ROC curve for" , country$nation, "(out of sample)"), print.auc=TRUE)
+  
+  plot.roc(country$recession[71:123], country$predrfOut[,2], percent=TRUE, col="green", 
+           lwd=4, print.auc=TRUE, add=TRUE, print.auc.y=40, direction = "<")
+  
+  legend("bottomright", legend=c("Probit Regression", "Random Forest"), col=c("blue", "green"), lwd=4)
+}
 
 
 
@@ -163,7 +175,8 @@ plotAll <- function(country, path){
   
   plotRec.in(rec)
   plotRec.out(rec)
-  
+  plotAUC.in(rec)
+  plotAUC.out(rec)
       
 
 }
