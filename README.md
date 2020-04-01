@@ -10,5 +10,5 @@ Details on the theoretical foundations can be found here -> https://drive.google
 
 ## Example and source code output ##
 
-Example and output of source code can be found here -> https://drive.google.com/open?id=1khGxfK3zJV-UkVRZdBmriNJUlIOG1thv
+Example and output of source code can be found on page 5 of the following link -> https://drive.google.com/open?id=1khGxfK3zJV-UkVRZdBmriNJUlIOG1thv
 
