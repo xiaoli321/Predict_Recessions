@@ -6,7 +6,7 @@ Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE
 Note that model makes estimations in real time. Some variables like Private credit to GDP are released with a 2 quarter lag.
 
 ## Theoretial foundations of the model ##
-Details on the theoretical foundations can be found here -> https://drive.google.com/open?id=1nfTctQ92lN3OmjJmkhKej8UWyXWGVgMF
+Details on the theoretical foundations of the model can be found here -> https://drive.google.com/open?id=1nfTctQ92lN3OmjJmkhKej8UWyXWGVgMF
 
 ## Example and source code output ##
 
