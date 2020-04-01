@@ -1,4 +1,4 @@
-# Predicting Recessions for the G7 Countries using a Random Forest #
+# Predicting Recessions for the G7 Countries with Machine Learning #
 
 ## Introduction ##
 
