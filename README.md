@@ -10,9 +10,6 @@ The AUROC criterion is used to gauage the performance of the probit and random f
 
 The reason the random forest model signifcently outperforms the probit model out of sample is because the ramdom forest uses a bootstraped sample of the original sample, thus reducing overfitting. Also since many of the explaintory variables behave similarly (ie. spike prior to a recession) the probit model suffers from multicollinarity which results in poor out of sample results. Meanwhile, since the random forest is not regression based, it does not suffer from issues like multicollinarity or spurious regression.  
 
-## Addtional details of the model ##
-Additional details of the model can be found here -> https://drive.google.com/open?id=1nfTctQ92lN3OmjJmkhKej8UWyXWGVgMF
-
 ## Dataset ##
 Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE6pCyRZ3eupC5EUv3D5e7sI4tD
 
@@ -20,9 +17,12 @@ Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE
 
 1. Download the dataset for the model.
 2. Save the source code and open it in R.
-3. Save the path where the dataset is stored in R (e.g. `path <- "C:/Users/..."`).
-4. Create a vector in R with all the G7 countries you are interested in (e.g. `countries <- c("CAN", "USA", "UK")` )
-5. Use the `plotAll` function to plot the probability of recession graphs (e.g. `plotAll(countries, path)` )
+3. Save the path where the dataset is stored in R e.g. `path <- "C:/Users/..."` .
+4. Create a vector in R with all the G7 countries you are interested in e.g. `countries <- c("CAN", "USA", "UK")` .
+5. Use the `plotAll` function to plot the probability of recession graphs e.g. `plotAll(countries, path)` .
+
+## Addtional details of the model ##
+Additional details of the model can be found here -> https://drive.google.com/open?id=1nfTctQ92lN3OmjJmkhKej8UWyXWGVgMF
 
 ## Example and source code output ##
 
