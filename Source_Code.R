@@ -66,7 +66,6 @@ recession <- function(country, path){
   
 }
 
-@
 
 # A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
 
