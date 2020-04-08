@@ -21,7 +21,7 @@ Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE
 4. Create a vector in R with all the G7 countries you are interested in e.g. `countries <- c("CAN", "USA", "UK")` .
 5. Use the `plotAll` function to plot the probability of recession graphs e.g. `plotAll(countries, path)` .
 
-## Addtional details of the model ##
+## Additional details of the model ##
 Additional details of the model can be found here -> https://drive.google.com/open?id=1nfTctQ92lN3OmjJmkhKej8UWyXWGVgMF
 
 ## Example and source code output ##
