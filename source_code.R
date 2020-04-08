@@ -12,9 +12,9 @@ set.seed(11233)
 
 # A function for getting the business cycle peak dates from the data.
 
-  rec_dates <- function(dataset){
-    dataset = dataset[1:137,]
-    idx = dataset[2:137, 8] - dataset[1:136,8]
+  rec_dates <- function(dataset, n){
+    dataset = dataset[1:n,]
+    idx = dataset[2:n, 8] - dataset[1:136,8]
     idx = idx < 0
     idx = append(FALSE, idx)
     dataset[idx, 1]
@@ -27,15 +27,19 @@ recession <- function(country, path){
   
   #read data from excel
   MRP_dataset <- read_excel(path, sheet = country)
-  
+  n <- nrow(MRP_dataset)-2
   #orgaizing the data
-  data <- MRP_dataset[15:137, 4:ncol(MRP_dataset)]
-  dates <- MRP_dataset[15:137, 1]
-  recDates <- rec_dates(MRP_dataset)
+  data <- MRP_dataset[15:n, 4:ncol(MRP_dataset)]
+  dates <- MRP_dataset[15:n, 1]
+  recDates <- rec_dates(MRP_dataset, n)
   colnames(data) <- c("x1", "x2", "x3", "x4", "rec")
   data$rec <- as.factor(data$rec)
   
-  #out of sample results
+  #Out of Sample Results
+  
+  #Out of sample results uses data from Q1 1988 to Q4 2005 to estimate the model parameters. 
+  #Next the model parameters are kept constant and used to estimate the probability of recession from Q1 2006 to Q1 2019
+
   
     #Random forest
   rfOut <- randomForest(rec ~ ., data=data, subset = 1:70)
@@ -46,6 +50,8 @@ recession <- function(country, path){
   glmOut <-  glm(rec ~ x1 + x2 + x3 + x4, family = binomial(link = "probit"), 
                    data = data[1:70,], maxit = 1000)
   
+  
+  #predProbOut <-  pnorm(as.matrix(cbind(1, data)[71:123, 1:3]) %*% glmOut$coefficients ) 
   
   predProbOut <- predict(glmOut, newdata = data[71:123,], type = "response")
   
