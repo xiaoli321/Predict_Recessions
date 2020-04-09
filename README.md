@@ -10,9 +10,11 @@ The AUROC criterion is used to gauage the performance of the probit and random f
 
 The random forest model signifcently outperforms the probit model out of sample because the ramdom forest uses a bootstraped sample of the original sample, thus reducing overfitting. Also, many of the explaintory variables behave similarly (ie. spike prior to a recession). Thus, the probit model suffers from multicollinarity resulting in poor out of sample results. Meanwhile, the random forest is not regression based, so it does not suffer from issues like multicollinarity or spurious regression.  
 
-## In Sample Result for USA##
+## In Sample Result for USA ##
 
 ![plot](https://github.com/xiaoli321/Predict_Recessions/blob/master/images/image.png?raw=true)
+
+_Out of Sample Results for the US and results for other G7 countries can be found in the links below._
 
 ## Dataset ##
 Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE6pCyRZ3eupC5EUv3D5e7sI4tD
