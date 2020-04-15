@@ -68,10 +68,7 @@ recession <- function(country, path){
                   "glmOut", "predProbOut", "rfIn", "glmIn", "nation", "n")
   
   res
-  
 }
-
-
 
 
 plotRec.out <- function(country){
@@ -105,7 +102,6 @@ plotRec.out <- function(country){
   
       
 }
-
 
 
 plotRec.in <- function(country){
@@ -158,8 +154,6 @@ plotAUC.in <- function(country){
 }
 
 
-
-
 plotAUC.out <- function(country){
   #A function for plotting the out of sample AUC curve for the probit and random forest model.
   
@@ -177,9 +171,6 @@ plotAUC.out <- function(country){
 }
 
 
-
-
-
 plotAll <- function(country, path){
   #A function for creating all the plots for a given country.
   
@@ -190,5 +181,4 @@ plotAll <- function(country, path){
   plotAUC.in(rec)
   plotAUC.out(rec)
       
-
 }
