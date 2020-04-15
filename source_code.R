@@ -9,21 +9,18 @@ library(aTSA)
 
 set.seed(11233)
 
-
-# A function for getting the business cycle peak dates from the data.
-
-  rec_dates <- function(dataset, n){
-    dataset = dataset[1:n,]
-    idx = dataset[2:n, 8] - dataset[1:(n-1), 8]
-    idx = idx < 0
-    idx = append(FALSE, idx)
-    dataset[idx, 1]
+rec_dates <- function(dataset, n){
+  # A function for getting the business cycle peak dates from the data.
+  dataset = dataset[1:n,]
+  idx = dataset[2:n, 8] - dataset[1:(n-1), 8]
+  idx = idx < 0
+  idx = append(FALSE, idx)
+  dataset[idx, 1]
     
-  }
-
-# A function for creating a list with all the models parameters and other relevant information for a given country. 
+}
 
 recession <- function(country, path){
+  # A function for creating a list with all the models parameters and other relevant information for a given country.
   
   #read data from excel
   MRP_dataset <- read_excel(path, sheet = country)
@@ -75,9 +72,11 @@ recession <- function(country, path){
 }
 
 
-# A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
+
 
 plotRec.out <- function(country){
+  # A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
+  
   # out of sample predictions
   
     #probability graphs
@@ -107,9 +106,11 @@ plotRec.out <- function(country){
       
 }
 
-# A function for plotting the in sample probability of recession for a given country using both a probit and random forest.
+
 
 plotRec.in <- function(country){
+  # A function for plotting the in sample probability of recession for a given country using both a probit and random forest.
+  
   # in sample predictions
   
     #probability graphs
@@ -138,9 +139,10 @@ plotRec.in <- function(country){
       
 }
 
-#A function for plotting the in sample AUC curve for the probit and random forest model.
+
 
 plotAUC.in <- function(country){
+  #A function for plotting the in sample AUC curve for the probit and random forest model.
   
   par(pty = "s")
   
@@ -156,9 +158,10 @@ plotAUC.in <- function(country){
 }
 
 
-#A function for plotting the out of sample AUC curve for the probit and random forest model.
+
 
 plotAUC.out <- function(country){
+  #A function for plotting the out of sample AUC curve for the probit and random forest model.
   
   par(pty = "s")
   
@@ -175,9 +178,11 @@ plotAUC.out <- function(country){
 
 
 
-#A function for creating all the plots for a given country.
+
 
 plotAll <- function(country, path){
+  #A function for creating all the plots for a given country.
+  
   rec <- recession(country, path)
   
   plotRec.in(rec)
