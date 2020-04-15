@@ -28,7 +28,10 @@ recession <- function(country, path){
   #read data from excel
   MRP_dataset <- read_excel(path, sheet = country)
   n <- nrow(MRP_dataset)-2
-  #orgaizing the data
+  
+  #organizing the data
+  #note the 15th row is the first none empty row since I need to calcuate the 3 year growth rate
+  #input parameter
   data <- MRP_dataset[15:n, 4:ncol(MRP_dataset)]
   dates <- MRP_dataset[15:n, 1]
   recDates <- rec_dates(MRP_dataset, n)
@@ -39,21 +42,20 @@ recession <- function(country, path){
   
   #Out of sample results uses data from Q1 1988 to Q4 2005 to estimate the model parameters. 
   #Next the model parameters are kept constant and used to estimate the probability of recession from Q1 2006 to Q1 2019
-
+  #Note row 70 has the Q4 2005 data.
   
     #Random forest
   rfOut <- randomForest(rec ~ ., data=data, subset = 1:70)
   
-  predrfOut <- predict(rfOut, newdata = data[71:123,], type = "vote") 
+  predrfOut <- predict(rfOut, newdata = data[71:(n-14),], type = "vote") 
   
     #Probit
   glmOut <-  glm(rec ~ x1 + x2 + x3 + x4, family = binomial(link = "probit"), 
                    data = data[1:70,], maxit = 1000)
   
+ 
   
-  #predProbOut <-  pnorm(as.matrix(cbind(1, data)[71:123, 1:3]) %*% glmOut$coefficients ) 
-  
-  predProbOut <- predict(glmOut, newdata = data[71:123,], type = "response")
+  predProbOut <- predict(glmOut, newdata = data[71:(n-14),], type = "response")
   
   #in sample results
   
