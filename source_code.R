@@ -14,7 +14,7 @@ set.seed(11233)
 
   rec_dates <- function(dataset, n){
     dataset = dataset[1:n,]
-    idx = dataset[2:n, 8] - dataset[1:136,8]
+    idx = dataset[2:n, 8] - dataset[1:(n-1), 8]
     idx = idx < 0
     idx = append(FALSE, idx)
     dataset[idx, 1]
@@ -65,10 +65,10 @@ recession <- function(country, path){
     #Probit
   glmIn <-  glm(rec ~ x1 + x2 + x3 + x4, family = binomial(link = "probit"), data = data, maxit = 1000)
   
-  res <- list(dates, recDates, data$rec, rfOut, predrfOut, glmOut, predProbOut, rfIn, glmIn, country)
+  res <- list(dates, recDates, data$rec, rfOut, predrfOut, glmOut, predProbOut, rfIn, glmIn, country, n)
   
   names(res) <- c("dates", "peakDates", "recession", "rfOut", "predrfOut", 
-                  "glmOut", "predProbOut", "rfIn", "glmIn", "nation")
+                  "glmOut", "predProbOut", "rfIn", "glmIn", "nation", "n")
   
   res
   
@@ -86,7 +86,7 @@ plotRec.out <- function(country){
   
   par(pty = "m")
   
-  plot(country$dates[71:123,1], country$predProbOut, type = "l",
+  plot(country$dates[71:(country$n - 14),1], country$predProbOut, type = "l",
        main = paste("Probability of Recession within next 12 month for", country$nation, "(out of sample)"), 
        ylab = "Probability", xlab = "Dates", col = "blue", lwd=3, ylim=range(c(0,1)))
   
@@ -96,7 +96,7 @@ plotRec.out <- function(country){
   
       # random forest graph
   
-  plot(country$dates[71:123,1], country$predrfOut[,2], type = "l",
+  plot(country$dates[71:(country$n - 14),1], country$predrfOut[,2], type = "l",
        col = "green", xlab = "", ylab = "", axes = F, lwd=3)
 
   legend("topright", legend=c("Probit Regression", "business cycle peak", "Random Forest"), 
@@ -162,12 +162,12 @@ plotAUC.out <- function(country){
   
   par(pty = "s")
   
-  roc(country$recession[71:123], as.numeric(country$predProbOut), plot=TRUE, 
+  roc(country$recession[71:(country$n - 14)], as.numeric(country$predProbOut), plot=TRUE, 
       legacy.axes=TRUE, percent=TRUE, xlab="False Positive Percentage", 
       ylab="True Postive Percentage", col="blue", lwd=4, direction = "<",
       main = paste("ROC curve for" , country$nation, "(out of sample)"), print.auc=TRUE)
   
-  plot.roc(country$recession[71:123], country$predrfOut[,2], percent=TRUE, col="green", 
+  plot.roc(country$recession[71:(country$n - 14)], country$predrfOut[,2], percent=TRUE, col="green", 
            lwd=4, print.auc=TRUE, add=TRUE, print.auc.y=40, direction = "<")
   
   legend("bottomright", legend=c("Probit Regression", "Random Forest"), col=c("blue", "green"), lwd=4)
