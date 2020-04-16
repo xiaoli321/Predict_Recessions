@@ -15,8 +15,7 @@ rec_dates <- function(dataset, n){
   idx = dataset[2:n, 8] - dataset[1:(n-1), 8]
   idx = idx < 0
   idx = append(FALSE, idx)
-  dataset[idx, 1]
-    
+  dataset[idx, 1] 
 }
 
 recession <- function(country, path){
@@ -76,8 +75,7 @@ plotRec.out <- function(country){
   legend("topright", legend=c("Probit Regression", "business cycle peak", "Random Forest"), 
          col=c("blue", "red", "green"), lwd=3)
   
-  par(new = FALSE)
-      
+  par(new = FALSE)     
 }
 
 plotRec.in <- function(country){
@@ -100,8 +98,6 @@ plotRec.in <- function(country){
          col=c("blue", "red", "green"), lwd=3)
   
   par(new = FALSE)
-  
-      
 }
 
 plotAUC.in <- function(country){
