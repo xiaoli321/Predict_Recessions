@@ -26,40 +26,28 @@ recession <- function(country, path){
   MRP_dataset <- read_excel(path, sheet = country)
   n <- nrow(MRP_dataset)-2
   
-  #organizing the data
-  #note the 15th row is the first none empty row since I need to calcuate the 3 year growth rate
-  #input parameter
+  #The 15th row is the first none empty row since I need to calcuate the 3 year growth rate.
+ 
   data <- MRP_dataset[15:n, 4:ncol(MRP_dataset)]
   dates <- MRP_dataset[15:n, 1]
   recDates <- rec_dates(MRP_dataset, n)
   colnames(data) <- c("x1", "x2", "x3", "x4", "rec")
   data$rec <- as.factor(data$rec)
   
-  #Out of Sample Results
+  # Out of sample results uses data from Q1 1988 to Q4 2005 to estimate the model parameters. 
+  # Next the model parameters are kept constant and used to estimate the probability of recession from Q1 2006 to Q1 2019
+  # Note row 70 has the Q4 2005 data.
   
-  #Out of sample results uses data from Q1 1988 to Q4 2005 to estimate the model parameters. 
-  #Next the model parameters are kept constant and used to estimate the probability of recession from Q1 2006 to Q1 2019
-  #Note row 70 has the Q4 2005 data.
-  
-    #Random forest
   rfOut <- randomForest(rec ~ ., data=data, subset = 1:70)
-  
   predrfOut <- predict(rfOut, newdata = data[71:(n-14),], type = "vote") 
   
-    #Probit
   glmOut <-  glm(rec ~ x1 + x2 + x3 + x4, family = binomial(link = "probit"), 
                    data = data[1:70,], maxit = 1000)
   
- 
-  
   predProbOut <- predict(glmOut, newdata = data[71:(n-14),], type = "response")
   
-  #in sample results
-  
-    #Random forest
   rfIn <- randomForest(rec ~ ., data=data)
-  
-    #Probit
+ 
   glmIn <-  glm(rec ~ x1 + x2 + x3 + x4, family = binomial(link = "probit"), data = data, maxit = 1000)
   
   res <- list(dates, recDates, data$rec, rfOut, predrfOut, glmOut, predProbOut, rfIn, glmIn, country, n)
@@ -70,16 +58,8 @@ recession <- function(country, path){
   res
 }
 
-
 plotRec.out <- function(country){
   # A function for plotting the out of sample probability of recession for a given country using both a probit and random forest.
-  
-  # out of sample predictions
-  
-    #probability graphs
-      
-      #probit graph
-  
   par(pty = "m")
   
   plot(country$dates[71:(country$n - 14),1], country$predProbOut, type = "l",
@@ -90,8 +70,6 @@ plotRec.out <- function(country){
   
   par(new = TRUE)
   
-      # random forest graph
-  
   plot(country$dates[71:(country$n - 14),1], country$predrfOut[,2], type = "l",
        col = "green", xlab = "", ylab = "", axes = F, lwd=3)
 
@@ -99,19 +77,12 @@ plotRec.out <- function(country){
          col=c("blue", "red", "green"), lwd=3)
   
   par(new = FALSE)
-  
       
 }
-
 
 plotRec.in <- function(country){
   # A function for plotting the in sample probability of recession for a given country using both a probit and random forest.
   
-  # in sample predictions
-  
-    #probability graphs
-      
-      #probit graph
   par(pty = "m")
   
   plot(country$dates, country$glmIn$fitted.values, type = "l",
@@ -121,8 +92,6 @@ plotRec.in <- function(country){
   abline(v = c(country$peakDates$`Observation date`), col = "red", lwd=3)
   
   par(new = TRUE)
-  
-      # random forest graph
   
   plot(country$dates, country$rfIn$votes[,2], type = "l",
        col = "green", xlab = "", ylab = "", axes = F, lwd=3)
@@ -134,8 +103,6 @@ plotRec.in <- function(country){
   
       
 }
-
-
 
 plotAUC.in <- function(country){
   #A function for plotting the in sample AUC curve for the probit and random forest model.
@@ -153,7 +120,6 @@ plotAUC.in <- function(country){
   legend("bottomright", legend=c("Probit Regression", "Random Forest"), col=c("blue", "green"), lwd=4)
 }
 
-
 plotAUC.out <- function(country){
   #A function for plotting the out of sample AUC curve for the probit and random forest model.
   
@@ -170,7 +136,6 @@ plotAUC.out <- function(country){
   legend("bottomright", legend=c("Probit Regression", "Random Forest"), col=c("blue", "green"), lwd=4)
 }
 
-
 plotAll <- function(country, path){
   #A function for creating all the plots for a given country.
   
@@ -179,6 +144,5 @@ plotAll <- function(country, path){
   plotRec.in(rec)
   plotRec.out(rec)
   plotAUC.in(rec)
-  plotAUC.out(rec)
-      
+  plotAUC.out(rec) 
 }
