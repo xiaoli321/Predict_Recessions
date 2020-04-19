@@ -144,7 +144,7 @@ plotAll <- function(country, path){
 }
 
 plotAllNations <- function(countries, path){
-  #A function for plotting all the countries in the countries variable.
+  #A function for plotting all the nations in the countries variable.
   
   for (country in countries){
     plotAll(country, path)
