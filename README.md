@@ -16,6 +16,10 @@ The random forest model signifcently outperforms the probit model out of sample 
 
 _Out of Sample Results for the US and results for other G7 countries can be found in the links below._
 
+## Results for other G7 countries ##
+
+Additonal results can be found on page 5 of the following link -> https://drive.google.com/open?id=1khGxfK3zJV-UkVRZdBmriNJUlIOG1thv
+
 ## Dataset ##
 Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE6pCyRZ3eupC5EUv3D5e7sI4tD
 
@@ -30,7 +34,5 @@ Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE
 ## Additional details of the model ##
 Additional details of the model can be found here -> https://drive.google.com/open?id=1nfTctQ92lN3OmjJmkhKej8UWyXWGVgMF
 
-## Example and source code output ##
 
-Example and output of source code can be found on page 5 of the following link -> https://drive.google.com/open?id=1khGxfK3zJV-UkVRZdBmriNJUlIOG1thv
 
