@@ -20,7 +20,7 @@ _Out of Sample Results for the US and results for other G7 countries can be foun
 
 ## Results for other G7 countries ##
 
-Additonal results can be found on page 5 of the following link -> https://drive.google.com/open?id=1ORYaAcCYyxFyZ5wVra2ARjGm-4m51MSK
+Additional results can be found on page 5 of the following link -> https://drive.google.com/open?id=1ORYaAcCYyxFyZ5wVra2ARjGm-4m51MSK
 
 ## Dataset ##
 Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE6pCyRZ3eupC5EUv3D5e7sI4tD
