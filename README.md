@@ -15,6 +15,7 @@ The random forest model signifcently outperforms the probit model out of sample 
 ![plot](https://github.com/xiaoli321/Predict_Recessions/blob/master/images/image.png?raw=true)
 
 _Model parameters estimated using data from Q1 1988 - Q1 2019._
+
 _Out of Sample Results for the US and results for other G7 countries can be found in the links below._
 
 ## Results for other G7 countries ##
