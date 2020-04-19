@@ -20,7 +20,7 @@ _Out of Sample Results for the US and results for other G7 countries can be foun
 
 ## Results for other G7 countries ##
 
-Additonal results can be found on page 5 of the following link -> https://drive.google.com/open?id=1khGxfK3zJV-UkVRZdBmriNJUlIOG1thv
+Additonal results can be found on page 5 of the following link -> https://drive.google.com/open?id=1ORYaAcCYyxFyZ5wVra2ARjGm-4m51MSK
 
 ## Dataset ##
 Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE6pCyRZ3eupC5EUv3D5e7sI4tD
@@ -34,7 +34,7 @@ Dataset for model can be found here -> https://drive.google.com/open?id=1UbXGOyE
 5. Use the `plotAll` function to plot the probability of recession graphs e.g. `plotAll(countries, path)` .
 
 ## Additional details of the model ##
-Additional details of the model can be found here -> https://drive.google.com/open?id=1nfTctQ92lN3OmjJmkhKej8UWyXWGVgMF
+Additional details of the model can be found here -> https://drive.google.com/open?id=1FflmT5IRhrdnuuJlBLJJJszvv45b3SoH
 
 
 
