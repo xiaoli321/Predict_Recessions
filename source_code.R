@@ -142,3 +142,11 @@ plotAll <- function(country, path){
   plotAUC.in(rec)
   plotAUC.out(rec) 
 }
+
+plotAllCount <- function(countries, path){
+  #A function for plotting all the countries in the countries variable.
+  
+  for (country in countries){
+    plotAll(country, path)
+  }
+}
