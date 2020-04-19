@@ -143,7 +143,7 @@ plotAll <- function(country, path){
   plotAUC.out(rec) 
 }
 
-plotAllNations <- function(countries, path){
+plotNations <- function(countries, path){
   #A function for plotting all the nations in the countries variable.
   
   for (country in countries){
